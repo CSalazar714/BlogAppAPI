@@ -4,6 +4,17 @@ const Blog = require('../schema/blogSchema')
 
 const blogRoute = express.Router()
 
+blogRoute.get('/', jwt.authenticationToken, (req, res) => {
+    let username = req.params.username
+
+    Blog.find({ private: false }, (error, blogs) => {
+        if (error) {
+            res.status(400).json({ message: error.message })
+        }
+        res.status(200).json({ message: blogs })
+    })
+})
+
 blogRoute.get('/:username', jwt.authenticationToken, (req, res) => {
     let username = req.params.username
 
@@ -11,9 +22,14 @@ blogRoute.get('/:username', jwt.authenticationToken, (req, res) => {
         if (error) {
             res.status(400).json({ message: error.message })
         }
+        if ({ private: true }) {
+            username: username == username
+        }
         res.status(200).json({ message: blogs })
     })
 })
+
+
 
 blogRoute.post('/:username', jwt.authenticationToken, (req, res) => {
     let username = req.params.username
