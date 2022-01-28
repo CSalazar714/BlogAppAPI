@@ -12,7 +12,7 @@ const authRouter = require('./routes/authRoutes')
 // const swaggerRoute = require('./docs/basicinfo')
 
 const app = express()
-const port = 1500 || process.env.PORT
+const port = process.env.PORT || 1500
 
 app.use(helmet())
 app.use(bodyParser.json())

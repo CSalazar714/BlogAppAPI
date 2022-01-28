@@ -5,7 +5,6 @@ const Blog = require('../schema/blogSchema')
 const blogRoute = express.Router()
 
 blogRoute.get('/', jwt.authenticationToken, (req, res) => {
-    let username = req.params.username
 
     Blog.find({ private: false }, (error, blogs) => {
         if (error) {
